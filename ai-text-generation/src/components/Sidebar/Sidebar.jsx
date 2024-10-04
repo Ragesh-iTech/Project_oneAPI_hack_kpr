@@ -3,6 +3,8 @@ import './Sidebar.css';
 import { assets } from '../../assets/assets';
 import { Context } from '../../context/context';
 
+// import { BrowserRouter,Route,Routes,Link } from "react-router-dom";
+
 const Sidebar = () => {
     const [extended, setExtended] = useState(false);
     const { onSent, prevPrompts, setRecentPrompt, newChat } = useContext(Context);
@@ -39,10 +41,13 @@ const Sidebar = () => {
                     <img src={assets.question_icon} alt="Question Icon" />
                     {extended ? <p>Help</p> : null}
                 </div>
-                <div className="bottom-item recent-entry">
-                    <a href="all_ai"><img src={assets.category_icon} alt="category Icon" /></a>
-                    {extended ? <p>AI Category</p> : null}
-                </div>
+                {/* <BrowserRouter> */}
+                    <div className="bottom-item recent-entry">
+                        <a href=""><img src={assets.category_icon} alt="category Icon" /></a>
+                        {extended ? <p>AI Category</p> : null}
+                    </div>
+                    
+                {/* </BrowserRouter> */}
                 <div className="bottom-item recent-entry">
                     <img src={assets.setting_icon} alt="Settings Icon" />
                     {extended ? <p>Settings</p> : null}

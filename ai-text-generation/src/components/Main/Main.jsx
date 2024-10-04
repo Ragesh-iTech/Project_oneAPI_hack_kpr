@@ -58,7 +58,7 @@ const Main = () => {
                         <p>{recentPrompt}</p>
                     </div>
                     <div className="result-data">
-                        <img src={assets.ai_icon} alt="" />
+                        <img className="img" src={assets.ai_icon} alt="" />
                         {loading
                         ?<div className="loader">
                             <hr />
@@ -67,7 +67,7 @@ const Main = () => {
                         </div>
                         :<>
                           <p dangerouslySetInnerHTML={{__html:resultData}} id="data"></p>
-                          <img src={assets.copy_icon} alt="Copy" onClick={copyToClipboard} />
+                          <img src={assets.copy_icon} id="text_copy" alt="Copy" onClick={copyToClipboard} />
                         </>                         
                         }
                         
