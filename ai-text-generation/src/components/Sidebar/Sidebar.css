@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins' , sans-serif;
+}
+
+.sidebar{
+    min-height: 100vh;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(45deg,rgb(247, 246, 246),rgb(0, 0, 0,0.2));
+    backdrop-filter: blur(10px);
+    border-radius: 0 5px 5px 0;
+    padding: 25px 15px;
+}
+.sidebar img{
+    width: 25px;
+}
+.sidebar .menu{
+    display: block;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.sidebar .new-chat{
+    margin-top: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background: linear-gradient(45deg, #FC120D,#F7CE38);
+    /* background-color: #e6eaf1; */
+    border-radius: 50px;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+.new-chat:hover{
+    background: linear-gradient(45deg, #F7CE38,#FC120D);
+    box-shadow:  0 0 10px black;
+}
+.sidebar .recent{
+    display: flex;
+    flex-direction: column;
+    height: 420px;
+    overflow-y: scroll;
+    animation: fadeIn 1.5s;
+}
+.recent::-webkit-scrollbar{
+    display: none;
+}
+.sidebar .recent-title{
+    margin: 30px 0 20px 0;
+    
+}
+.sidebar .recent-entry{
+    display: flex;
+    align-items: start;
+    gap: 10px;
+    padding: 10px 40px 10px 10px;
+    border-radius: 50px;
+    color: #000000;
+    cursor: pointer;
+}
+.sidebar .recent-entry:hover{
+    background: linear-gradient(45deg,#5B146F,#FF009C);
+    color: white;
+    /* background-color: #e2e6eb; */
+}
+.sidebar .bottom{
+    display: flex;
+    flex-direction: column;
+}
+.sidebar .bottom-item{
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+@media (max-width:600px){
+    .sidebar{
+        display: none;
+    }
+}
