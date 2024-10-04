@@ -11,6 +11,44 @@ const ContextProvider = (props) => {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
+    
+    // ============= copy to clipboard function ==============
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(resultData).then(() => {
+            alert("Copied to clipboard!");
+        }).catch(err => {
+            console.error("Failed to copy text: ", err);
+        });
+    };
+    // ============= copy to clipboard function end ==============
+
+    // ============= voice to text function ==============
+    const startVoiceRecognition = () => {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        
+        recognition.onstart = () => {
+            console.log("Voice recognition started. Speak into the microphone.");
+        };
+    
+        recognition.onspeechend = () => {
+            recognition.stop();
+        };
+    
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            console.log("User spoke:", transcript);
+            setInput(transcript); // Set recognized text as input
+        };
+    
+        recognition.onerror = (event) => {
+            console.error("Error occurred in recognition: " + event.error);
+        };
+    
+        recognition.start();
+    }; 
+    // ============= voice to text function end ==============
+    
 
     const delayPara = (index, nextWord) => {
         setTimeout(() => {
@@ -63,6 +101,9 @@ const ContextProvider = (props) => {
         }
     };
 
+    // copy text code
+    
+
     const contextValue = {
         prevPrompts,
         setPrevPrompts,
@@ -75,7 +116,9 @@ const ContextProvider = (props) => {
         input,
         setInput,
         newChat,
-        handleKeyPress
+        handleKeyPress,
+        copyToClipboard,  // Expose copy to clipboard
+        startVoiceRecognition // Expose voice-to-text function        
     };
 
     return (
@@ -192,96 +235,3 @@ const ContextProvider = (props) => {
 export default ContextProvider;
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ===========================================================
-import { createContext, useState } from "react";
-import runChat from "../config/chatstar";
-
-export const Context = createContext();
-
-const ContextProvider = (props) => {
-
-    const [input, setInput] = useState("");
-    const [recentPrompt,setRecentPrompt] = useState("");
-    const [prevPrompt, setPrevPrompts] = useState([]);
-    const [showResult, setShowResult] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [resultData, setResultData] = useState("");
-
-    const delayPara = (index,nextWord) => {
-        setTimeout(function () {
-            setResultData(prev=>prev+nextWord);
-        }, 75*index);
-    }
-
-    const onSent = async (prompt) => {
-
-        setResultData("")
-        setLoading(true)
-        setShowResult(true)
-        setRecentPrompt(input)
-        setPrevPrompts(prev => [...prev,input])
-        const response = await runChat(input)
-        let responseArray = response.split("**");
-        let newResponse="" ;
-        for(let i=0; i<responseArray.length; i++)
-        {
-            if (i === 0 || i%2 !== 1) {
-                newResponse += responseArray[i];
-            }
-            else{
-                newResponse += "<b>" + responseArray[i] + "</b>";
-            }
-        }
-        let newResponse2 = newResponse.split("*").join("</br>")
-        let newResponseArray = newResponse2.split(" ");
-        for(let i= 0 ;i<newResponseArray.length ; i++)
-        {
-            const nextWord = newResponseArray[i];
-            delayPara(i,nextWord+" ");
-        }
-        // setResultData(newResponse2)
-        setLoading(false)
-        setInput("")
-    }
-    // onSent("What is python")
-
-    const contextValue = {
-        prevPrompt,
-        setPrevPrompts,
-        onSent,
-        setRecentPrompt,
-        recentPrompt,
-        showResult,
-        loading,
-        resultData,
-        input,
-        setInput
-    }
-
-    return (
-        <Context.Provider value={contextValue}>
-            {props.children}
-        </Context.Provider>
-    )
-}
-
-export default ContextProvider;
- ================================================================  */

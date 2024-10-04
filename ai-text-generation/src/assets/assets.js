@@ -13,6 +13,7 @@ import message_icon from './comment.png'
 import code_icon from './code.png'
 import send_icon from './paper-plane.png'
 import ai_icon from './c-star.png'
+import copy_icon from './copy_icon.png'
 
 export const assets = {
     category_icon,
@@ -30,4 +31,5 @@ export const assets = {
     code_icon ,
     send_icon ,
     ai_icon,
+    copy_icon,    
 }

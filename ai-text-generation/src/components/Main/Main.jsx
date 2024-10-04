@@ -5,7 +5,18 @@ import { Context } from "../../context/context"
 
 const Main = () => {
 
-    const {onSent,recentPrompt,showResult,loading,resultData,setInput,input,handleKeyPress} = useContext(Context);
+    const {
+        onSent,
+        recentPrompt,
+        showResult,
+        loading,
+        resultData,
+        setInput,
+        input,
+        handleKeyPress,
+        copyToClipboard,  // Expose copy to clipboard
+        startVoiceRecognition     // Expose voice-to-text function
+    } = useContext(Context);
 
 
     return (
@@ -54,8 +65,12 @@ const Main = () => {
                             <hr />
                             <hr />
                         </div>
-                        :<p dangerouslySetInnerHTML={{__html:resultData}}></p>
+                        :<>
+                          <p dangerouslySetInnerHTML={{__html:resultData}} id="data"></p>
+                          <img src={assets.copy_icon} alt="Copy" onClick={copyToClipboard} />
+                        </>                         
                         }
+                        
                     </div>
                 </div>
                 }              
@@ -71,7 +86,7 @@ const Main = () => {
                         />
                         <div>
                             <img src={assets.gallery_icon} alt="" />
-                            <img src={assets.mic_icon} alt="" />
+                            <img src={assets.mic_icon} alt="" onClick={startVoiceRecognition} />
                             {input?<img onClick={()=>onSent()} src={assets.send_icon} alt="" />:null}
                         </div>
                     </div>
